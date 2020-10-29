@@ -8,6 +8,7 @@ router.post("/newproduct", async (req, res) => {
     description: req.body.description,
     price: req.body.price,
     stock: req.body.stock,
+    seller:req.body.seller,
   });
  
   try {
@@ -58,6 +59,7 @@ router.patch("/:productId", async (req, res) => {
           description: req.body.description,
           price: req.body.price,
           stock: req.body.stock,
+          seller:req.body.seller,
         },
       }
     );
