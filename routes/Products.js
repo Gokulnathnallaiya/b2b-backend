@@ -9,7 +9,7 @@ const upload = multer({
     fileSize: 10000000,
   },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(JPG|PNG|jpeg)$/)) {
+    if (!file.originalname.match(/\.(jpg|png|PNG|JPG|jpeg)$/)) {
       return cb(new Error("Please upload an Image"));
     }
     cb(undefined, true);
@@ -37,7 +37,7 @@ router.post("/newproduct", upload.single("image"), async (req, res) => {
       price: req.body.price,
       stock: req.body.stock,
       seller: req.body.seller,
-      image:req.file.buffer,
+      image:req.file.buffer ?  req.file.buffer :  null,
     },
     (error, req, res, next) => {
       res.status(400).send({ error: error.message });
