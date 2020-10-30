@@ -102,4 +102,25 @@ router.patch("/:productId", async (req, res) => {
   }
 });
 
+
+router.get('/:id/image',async (req,res)=>{
+
+  try{
+
+    const product = await Product.findById(req.params.id)
+
+    if(!product||!product.image){
+      throw new Error()
+    }
+
+    res.set('Content-Type','image/jpg')
+    res.send(product.image)
+
+  }
+  catch (e){
+    res.status(400).send()
+  }
+})
+
+
 module.exports = router;
