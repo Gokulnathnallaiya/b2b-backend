@@ -7,6 +7,9 @@ const ProductSchema = mongoose.Schema({
     price:Number,
     stock:Number,
     seller:String,
+    image:{
+        type: Buffer
+    }
 
 })
 

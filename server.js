@@ -5,10 +5,12 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const mongoose = require("mongoose");
 
+
 //routes
 
 const productRoutes = require("./routes/Products");
 const sellerRoutes = require("./routes/Sellers");
+
 
 
 
@@ -18,6 +20,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/products",productRoutes);
 app.use("/sellers",sellerRoutes);
+
 
 
 app.get("/", (req, res) => {
