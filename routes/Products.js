@@ -18,17 +18,6 @@ const upload = multer({
     // cb(undefined,False)
   },
 });
-router.post(
-  "/upload",
-  upload.single("image"),
-  async (req, res) => {
-    console.log(req.Prod);
-  },
-  (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
-  }
-);
-
 router.post("/newproduct", upload.single("image"), async (req, res) => {
   const product = new Product(
     {
