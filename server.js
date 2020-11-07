@@ -1,15 +1,17 @@
 const express = require('express');
 const app = express();
 require("dotenv/config");
+require('./db/mongoose');
 const bodyParser = require('body-parser');
 var cors = require('cors');
-const mongoose = require("mongoose");
+
+const bcrypt = require("bcryptjs");
 
 
 //routes
 
-const productRoutes = require("./routes/Products");
-const sellerRoutes = require("./routes/Sellers");
+const productRoutes = require("./routes/product");
+const sellerRoutes = require("./routes/seller");
 
 
 
@@ -29,13 +31,20 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect(
-  process.env.mongo_connection,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  () => {
-    console.log("connected");
-  }
-);
+
+
+
+const myFUnction = async ()=>{
+
+  const password = "Red12345"
+  const hashedpassword = await bcrypt.hash(password, 8 )
+  console.log(hashedpassword)
+
+  const isMatch = await bcrypt.compare("Red12345",hashedpassword)
+  console.log(isMatch)
+
+}
+myFUnction();
 
 app.listen(port,()=>{
     console.log('server Up and running ')
