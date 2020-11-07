@@ -21,12 +21,13 @@ const upload = multer({
 router.post("/newproduct", upload.single("image"), async (req, res) => {
   const product = new Product(
     {
-      name: req.body.name,
+      title: req.body.title,
       description: req.body.description,
-      price: req.body.price,
+      disPrice: req.body.disPrice,
+      oriPrice: req.body.oriPrice,
       stock: req.body.stock,
       seller: req.body.seller,
-      image:req.file.buffer ?  req.file.buffer :  null,
+      image: req.file.buffer ? req.file.buffer : null,
     },
     (error, req, res, next) => {
       res.status(400).send({ error: error.message });
@@ -77,9 +78,10 @@ router.patch("/:productId", async (req, res) => {
       { _id: req.params.productId },
       {
         $set: {
-          name: req.body.name,
+          title: req.body.title,
           description: req.body.description,
-          price: req.body.price,
+          disPrice: req.body.disPrice,
+          oriPrice: req.body.oriPrice,
           stock: req.body.stock,
           seller: req.body.seller,
         },
@@ -91,25 +93,19 @@ router.patch("/:productId", async (req, res) => {
   }
 });
 
+router.get("/:id/image", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
 
-router.get('/:id/image',async (req,res)=>{
-
-  try{
-
-    const product = await Product.findById(req.params.id)
-
-    if(!product||!product.image){
-      throw new Error()
+    if (!product || !product.image) {
+      throw new Error();
     }
 
-    res.set('Content-Type','image/jpg')
-    res.send(product.image)
-
+    res.set("Content-Type", "image/jpg");
+    res.send(product.image);
+  } catch (e) {
+    res.status(400).send();
   }
-  catch (e){
-    res.status(400).send()
-  }
-})
-
+});
 
 module.exports = router;
