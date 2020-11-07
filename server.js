@@ -9,7 +9,7 @@ const bcrypt = require("bcryptjs");
 
 
 //routes
-
+ //
 const productRoutes = require("./routes/product");
 const sellerRoutes = require("./routes/seller");
 
