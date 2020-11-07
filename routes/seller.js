@@ -1,5 +1,5 @@
 const express = require("express");
-const Seller = require("../models/seller");
+const Seller = require("../models/Seller");
 const router = express.Router();
 //new product
 router.post("/newseller", async (req, res) => {
