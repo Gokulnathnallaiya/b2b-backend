@@ -12,7 +12,7 @@ const bcrypt = require("bcryptjs");
  //
 const productRoutes = require("./routes/product");
 const sellerRoutes = require("./routes/seller");
-
+const userRoutes = require("./routes/user");
 
 
 
@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/products",productRoutes);
 app.use("/sellers",sellerRoutes);
+app.use("/",userRoutes);
 
 
 
